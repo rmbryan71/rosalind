@@ -29,18 +29,5 @@ def gc_load(i):
             m += 1
     return 100*(float(m)/n)
 
-def solve_gc():
-    max_gc = 0
-    for x, y in parse_fasta(load_data('gc')).items():
-        if gc_load(y) > max_gc:
-            max_gc = gc_load(y)
-            return x, gc_load(y)
-
-print(solve_gc())
-
-
-
-
-
-
-
+def dna_to_rna(dna):
+    return (dna.replace('T','U'))
