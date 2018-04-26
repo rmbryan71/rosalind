@@ -1,4 +1,10 @@
 # rosalind
 Computational Bioinformatics in Jupyter and Python
 
-Clean - Concise overview and introduction into this project
+These are my solutions to the bioinformatics challenges set here: http://rosalind.info/problems/list-view/
+
+.ipynb files are Jupyter Notebooks, which I used for the earlier problems.
+I've switched to using Python, and I'm naming my code files 
+in the solutions folder to match the url of the problem.
+
+For example, the solution file "sseq.py" resolves http://rosalind.info/problems/sseq/
