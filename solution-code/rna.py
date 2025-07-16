@@ -1,13 +1,9 @@
 import os
 
-def count_nucleotides(sequence):
+def dna_rna_transcribe(sequence):
     return (
-        sequence.count("A"),
-        sequence.count("C"),
-        sequence.count("G"),
-        sequence.count("T")
+        sequence.replace("T", "U")
     )
-
 
 def read_dna_sequence(file_path):
     try:
@@ -18,15 +14,12 @@ def read_dna_sequence(file_path):
     except IOError as e:
         raise IOError(f"Error reading DNA file: {e}")
 
-
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_dna.txt"
-    solution_path = "../solution-outputs/rosalind_dna.txt"
-    sequence = read_dna_sequence(file_path)
-    a, c, g, t = count_nucleotides(sequence)
+    file_path = "/Users/robertbryan/Downloads/rosalind_rna.txt"
+    solution_path = "../solution-outputs/rosalind_rna.txt"
     if os.path.exists(solution_path):
         os.remove(solution_path)
     file = open(solution_path, "x")
-    file.write(f"{a} {c} {g} {t}")
+    file.write(dna_rna_transcribe(read_dna_sequence(file_path)))
     file.close()
-    print(f"{a} {c} {g} {t}")
+    print(f"Done.")
