@@ -10,7 +10,7 @@ if __name__ == "__main__":
     def subs(s, t):
         solution = ''
         for i in range(0, len(s) - 1):
-            if s[i, (i + len(t))] == t[0, (len(t) - 1)]:
+            if (s[i:i+len(t)]) == t:
                 solution += str(i + 1)
                 solution += ' '
         return solution
