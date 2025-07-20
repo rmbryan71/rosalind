@@ -14,17 +14,7 @@ if __name__ == "__main__":
     f = int(file[5])
     ### Solving code goes here
     def iev(a, b, c, d, e, f):
-        print(a, b, c, d, e, f)
-        couples = a * [("AA", "AA")] + b * [("AA", "Aa")] + c * [("AA", "aa")] + d * [("Aa", "Aa")] + e * [("Aa", "aa")] + f * [("aa", "aa")]
-        count = 0
-        for couple in couples:
-            if couple in [("AA", "AA"), ("AA", "Aa"), ("AA", "aa")]:
-                count += 2 # both children will have the dominant phenotype
-            if couple in [("Aa, Aa")]:
-                count += 1.5 # On average, 1.5 children will have the dominant phenotype
-            if couple in [("Aa, aa")]:
-                count += 1 # On average, 1 child will have the dominant phenotype
-        return str(count)
+        return str(a*2 + b*2 + c*2 + d*1.5 + e)
 
     solution = iev(a, b, c, d, e, f)
 
