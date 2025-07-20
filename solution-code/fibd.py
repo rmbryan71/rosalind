@@ -11,13 +11,14 @@ if __name__ == "__main__":
         history = [0, 1, 1]
         generations = 2
         for i in range(2, n):
-            generations += 1
-            current = history[generations - 2] + history[generations - 1]
-            if generations > m:
-                current -= history[generations - m]
-            history.append(current)
+            if i < m:
+                history.append(history[-1] + history[-2])
+            if i == m:
+                history.append(history[-1] + history[-2] - 1)
+            if i > m:
+                history.append((history[-1] + history[-2]) - history[-m-1])
         print(history)
-        return current
+        return history[-1]
     solution = str(fib(n, m))
     ### End of solving code
     if os.path.exists(solution_path):
