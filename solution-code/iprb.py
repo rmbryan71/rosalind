@@ -27,7 +27,6 @@ if __name__ == "__main__":
             if parents == ('Aa', 'aa'):
                 count += .50
         return str(round((count/trial_size), 3))
-
     solution = iprb(k, m, n)
     ### End of solving code
     if os.path.exists(solution_path):
