@@ -1,5 +1,7 @@
 import os
 
+# See my article about this code: https://www.robertbryan.net/posts/2025-07-16-rna.html
+
 def dna_rna_transcribe(sequence):
     return (
         sequence.replace("T", "U")

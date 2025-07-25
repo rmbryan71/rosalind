@@ -1,5 +1,7 @@
 import os
 
+# See my article about this code: https://www.robertbryan.net/posts/2025-07-15-dna.html
+
 def count_nucleotides(sequence):
     return (
         sequence.count("A"),
@@ -24,8 +26,8 @@ if __name__ == "__main__":
     solution_path = "../solution-outputs/rosalind_dna.txt"
     sequence = read_dna_sequence(file_path)
     a, c, g, t = count_nucleotides(sequence)
-    if os.path.exists(solution_path):
-        os.remove(solution_path)
+#    if os.path.exists(solution_path):
+#        os.remove(solution_path)
     file = open(solution_path, "x")
     file.write(f"{a} {c} {g} {t}")
     file.close()
