@@ -4,7 +4,6 @@ from Bio import SeqIO
 def read_fasta(file):
     return list(SeqIO.parse(file, 'fasta'))
 
-
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_grph.txt"
     solution_path = "../solution-outputs/rosalind_grph.txt"
