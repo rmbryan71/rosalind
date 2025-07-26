@@ -4,8 +4,10 @@ if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_subs.txt"
     solution_path = "../solution-outputs/rosalind_subs.txt"
     file = open(file_path, "r").readlines()
-    s = file[0]
-    t = file[1]
+    s = file[0].strip()
+    t = file[1].strip()
+    # print(s)
+    # print(t)
     ### Solving code goes here
     def subs(s, t):
         solution = ''
@@ -15,10 +17,10 @@ if __name__ == "__main__":
                 solution += ' '
         return solution
     solution = subs(s, t)
+    print(solution)
     ### End of solving code
     if os.path.exists(solution_path):
         os.remove(solution_path) #idempotent : https://en.wikipedia.org/wiki/Idempotence
     file = open(solution_path, "x")
     file.write(solution)
     file.close()
-    print(solution)
