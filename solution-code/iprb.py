@@ -1,6 +1,5 @@
 import itertools
 import os
-from itertools import combinations
 import random
 
 if __name__ == "__main__":
