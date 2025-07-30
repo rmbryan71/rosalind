@@ -6,13 +6,13 @@ def read_fasta(file):
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_splc.txt"
-    sequence = Seq(str(read_fasta(file_path)[0].seq))
-    print(sequence)
+    sequence = Seq(read_fasta(file_path)[0].seq)
+    # print(sequence)
     introns = read_fasta(file_path)[1:]
     for intron in introns:
-        sequence.replace(str(intron.seq), '')
-    sequence.replace('T', 'U')
-    print(sequence.translate())
+        sequence = sequence.replace(intron.seq,'')
+        # print(sequence)
+    print(sequence.translate()[:-1])
 
 
 
