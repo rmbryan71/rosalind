@@ -8,13 +8,8 @@ if __name__ == "__main__":
     s = str(read_fasta(file_path)[0].seq).strip()
     t = str(read_fasta(file_path)[1].seq).strip()
     print(t)
-    m = 0
-    solution = []
-    for j in range(len(t)):
-        i = s.find(t[j], m, len(s))
-        if i > m:
-            solution.append(i + 1)
-            m = i
-    for x in solution:
-        print(s[x - 1], end='')
-    print('\n', solution)
+    i = -1
+    for char in t:
+        i = s.find(char, i + 1)
+        print(i+1, end = ' ')
+
