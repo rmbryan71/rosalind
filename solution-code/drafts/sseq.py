@@ -7,13 +7,14 @@ if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_sseq.txt"
     s = str(read_fasta(file_path)[0].seq).strip()
     t = str(read_fasta(file_path)[1].seq).strip()
-    print(s, t)
+    print(t)
     m = 0
     solution = []
     for j in range(len(t)):
-        i = s.index(t[j], m, len(s))
+        i = s.find(t[j], m, len(s))
         if i > m:
             solution.append(i + 1)
             m = i
-    print(solution)
-    print(len(solution), len(t))
+    for x in solution:
+        print(s[x - 1], end='')
+    print('\n', solution)
