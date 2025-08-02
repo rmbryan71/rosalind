@@ -1,6 +1,4 @@
 import os
-
-from Bio.Phylo.PhyloXML import Sequence
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
 
 def read_protein_sequence(file_path):
@@ -14,7 +12,7 @@ def read_protein_sequence(file_path):
 
 def prtm(file_path):
     seq = ProteinAnalysis(read_protein_sequence(file_path), True)
-    print(seq.sequence)
+    # print(seq.sequence)
     return seq.molecular_weight() - 18.01056
 
 if __name__ == "__main__":
