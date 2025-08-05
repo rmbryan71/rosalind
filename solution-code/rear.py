@@ -7,11 +7,11 @@ def performReversal(sequence, start, end):
 def findBreakpoints(sequence, target_sequence):
     breakpoints = []
     for i in range (len(sequence)-1):
-        current_element = sequence[i]uence.index(adjacent_element)) != 1:
+        current_element = sequence[i]
+        adjacent_element = sequence[i+1]
+        if abs(target_sequence.index(current_element) - target_sequence.index(adjacent_element)) != 1:
             breakpoints.append(i+1)
     return breakpoints
-        adjacent_element = sequence[i+1]
-        if abs(target_sequence.index(current_element) - target_seq
 
 def findMinimumBreakpointReversals(sequences, target_sequence):
     reversals = []
