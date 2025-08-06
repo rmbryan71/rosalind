@@ -24,7 +24,6 @@ def min_edges(n, edge_list):
     components = count_components(n, edge_list)
     return components-1
 
-
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_tree.txt"
     solution_path = "../solution-outputs/rosalind_tree.txt"
@@ -32,22 +31,9 @@ if __name__ == "__main__":
     n = int(file[0])
     print(n)
     edges = []
-    myedges = [(1, 2), (2, 8), (4, 10), (5, 9), (6, 10), (7, 9)]
     for line in file[1:]:
-        line = line.strip().split(' ')
-        for value in line:
-            value = int(value)
-        edges.append(line)
+        line = line.strip()
+        vals = line.split(' ')
+        edges.append((int(vals[0]), int(vals[1])))
     print(edges)
-    print(myedges)
-    strnodes = []
-    for edge in edges:
-        for node in edge:
-            if node not in strnodes:
-                strnodes.append(node)
-    intnodes = []
-    for node in strnodes:
-        intnodes.append(int(node))
-    intnodes.sort()
-    print(intnodes)
-    print(min_edges(n, myedges))
+    print(min_edges(n, edges))
