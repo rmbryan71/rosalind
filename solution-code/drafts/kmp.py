@@ -15,8 +15,9 @@ if __name__ == "__main__":
         if sequence[i]!=sequence[0]:
             result.append(0)
         else:
+            result.append(1)
             value = 1
             while sequence[i+value] == sequence[value]:
                 value+=1
-            result.append(value)
+                result.append(value)
     print(result)
