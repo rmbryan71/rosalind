@@ -1,23 +1,25 @@
 from Bio import SeqIO
 
-def read_fasta(file):
-    return list(SeqIO.parse(file, 'fasta'))
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_kmp.txt"
-    solution_path = "../solution-outputs/rosalind_kmp.txt"
-    sequence = str(read_fasta(file_path)[0].seq)
-    print(sequence)
-    result = []
-    for i in range(1, len(sequence)):
-        if i == 1:
-            result.append(0)
-        if sequence[i]!=sequence[0]:
-            result.append(0)
+    solution_path = "../../solution-outputs/rosalind_kmp.txt"
+    sequence_collection = []
+    for seq_record in SeqIO.parse(file_path, "fasta"):
+        sequence_collection.append(seq_record.seq)
+    sequence = sequence_collection.pop(0)
+    result = [0]*len(sequence)
+    position = 2
+    condition = 0
+    while position < len(sequence):
+        if sequence[position-1]==sequence[condition]:
+            condition+=1
+            result[position] = condition
+            position+=1
+        elif condition>0:
+            condition=result[condition]
         else:
-            result.append(1)
-            value = 1
-            while sequence[i+value] == sequence[value]:
-                value+=1
-                result.append(value)
-    print(result)
+            result[position]=0
+            position+=1
+    solution = str((result[1:], 0))
+    print((solution).replace('(', '').replace("[",'').replace(',','').replace(']','').replace(')',''))
