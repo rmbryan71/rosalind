@@ -29,7 +29,7 @@ def backtrack(C, s, t, i, j):
         return backtrack(C, s, t, i-1, j)
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_lcsq.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_lcsq_sample.txt"
     solution_path = "../../solution-outputs/rosalind_lcsq.txt"
     if os.path.exists(solution_path):
         os.remove(solution_path)
@@ -37,5 +37,5 @@ if __name__ == "__main__":
     t = read_fasta(file_path)[1].seq
     s = str(s).strip()
     t = str(t).strip()
-    print(LCSLength(s,t))
+    # print(LCSLength(s,t))
     print(backtrack((LCSLength(s,t)), s, t, len(s)-1, len(t)-1))
