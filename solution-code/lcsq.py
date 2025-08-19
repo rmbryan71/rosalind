@@ -8,8 +8,8 @@ def read_fasta(file):
 
 def LCSLength(s, t):
     C = [[0 for i in range(len(t)+1)] for j in range(len(s)+1)]
-    for i in range(1, len(s)):
-        for j in range(1, len(t)):
+    for i in range(len(s)):
+        for j in range(len(t)):
             if s[i] == t[j]:
                 C[i][j]=C[i-1][j-1] + 1
             else:
@@ -17,9 +17,9 @@ def LCSLength(s, t):
     return C
 
 def backtrack(C, s, t, i, j):
-    if i == 0:
+    if i == -1:
         return ""
-    if j == 0:
+    if j == -1:
         return ""
     if s[i] == t[j]:
         return backtrack(C, s, t, i-1, j-1) + s[i]
@@ -29,10 +29,7 @@ def backtrack(C, s, t, i, j):
         return backtrack(C, s, t, i-1, j)
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_lcsq_sample.txt"
-    solution_path = "../../solution-outputs/rosalind_lcsq.txt"
-    if os.path.exists(solution_path):
-        os.remove(solution_path)
+    file_path = "/Users/robertbryan/Downloads/rosalind_lcsq.txt"
     s = read_fasta(file_path)[0].seq
     t = read_fasta(file_path)[1].seq
     s = str(s).strip()
