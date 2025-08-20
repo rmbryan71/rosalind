@@ -63,10 +63,7 @@ def corrections(errors, corrects):
     return response
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_corr_sample.txt"
-    solution_path = "../solution-outputs/rosalind_corr.txt"
-    if os.path.exists(solution_path):
-        os.remove(solution_path)
+    file_path = "/Users/robertbryan/Downloads/rosalind_corr.txt"
     sequences = []
     for record in read_fasta(file_path):
         sequences.append(record.seq)
