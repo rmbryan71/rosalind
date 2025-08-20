@@ -53,12 +53,12 @@ def find_good_reads(seqs):
 def corrections(errors, corrects):
     for a in range(len(corrects)):
         corrects.append(Seq.reverse_complement(corrects[a]))
-    print(corrects)
+    # print(corrects)
     for s in errors:
         for t in corrects:
             if hamm(s, t) == 1:
                 print(s, "->", t)
-    return errors
+    return None
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_corr.txt"
@@ -69,9 +69,9 @@ if __name__ == "__main__":
     for record in read_fasta(file_path):
         sequences.append(record.seq)
     # print(sequences)
-    print(find_bad_reads(sequences))
-    print(find_good_reads(sequences))
-    print(corrections(find_bad_reads(sequences), find_good_reads(sequences)))
+    # print(find_bad_reads(sequences))
+    # print(find_good_reads(sequences))
+    corrections(find_bad_reads(sequences), find_good_reads(sequences))
 
 
 
