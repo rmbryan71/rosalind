@@ -63,7 +63,7 @@ def corrections(errors, corrects):
     return response
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_corr.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_corr_sample.txt"
     solution_path = "../solution-outputs/rosalind_corr.txt"
     if os.path.exists(solution_path):
         os.remove(solution_path)
@@ -75,4 +75,4 @@ if __name__ == "__main__":
     # print(find_good_reads(sequences))
     answer = corrections(find_bad_reads(sequences), find_good_reads(sequences))
     for x, y in answer.items():
-        print(x, "->", y)
+        print(x+'->'+y)
