@@ -18,11 +18,28 @@ def cat(n):
 def maxchar(s):
     return max(s.count("A"), s.count("G"))
 
+def isComplement(a, b):
+    if a == "A" and b == 'U' or a == 'U' and b == 'A':
+        return True
+    if a == "C" and b == 'G' or a == 'G' and b == 'C':
+        return True
+    else:
+        return False
+
+def pairings(s):
+    result = []
+    for i in range(len(s)-1):
+        for j in range(i+1, len(s)):
+            if isComplement(s[i], s[j]):
+                result.append([i, j] + pairings(s[:i]+s[i+1:j]+s[j+1:]))
+    return result
+
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_cat_sample2.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_cat_figure3.txt"
     s = str(read_fasta(file_path)[0].seq).strip()
-    ls = len(s)
-    print(ls)
-    print(maxchar(s))
-    print(cat()%1000000)
+    nodes = []
+    for char in s:
+        nodes.append(char)
+    print(len(pairings(nodes)))
+
 
