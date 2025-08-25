@@ -33,7 +33,7 @@ def isComplement(a, b):
 
 def matches(s):
     s = list (s)
-    print(s)
+    # print(s)
     matches = []
     for i in range(len(s)):
         for j in range(len(s)):
@@ -55,6 +55,34 @@ def is_complete_match(s):
             if s[j][0] == y or s[j][1] == y:
                 return False
     return True
+
+def remove_dupes(s, x, y):
+    response = []
+    for edge in s:
+        if edge[0] != x and edge[1] != x and edge[0] != y and edge[1] != y:
+            response.append(edge)
+    return response
+
+def fast_complete_matches(s, t):
+    # s is the set of matches
+    # n is the count of matches required to be full
+    for match in s:
+        # print(match)
+        t.append(match)
+        s1 = fast_complete_matches(remove_dupes(s, match[0], match[1]), t)
+        if len(t) == 6:
+            print(t)
+
+def slow_complete_matches(s):
+    count = 0
+    nodes = []
+    for char in s:
+        nodes.append(char)
+    complete_matches = []
+    for subset in itertools.combinations(matches(nodes), len(nodes)//2):
+        if is_complete_match(subset):
+            complete_matches.append(subset)
+    return complete_matches
 
 def is_noncrossing(t):
     t = list(t)
@@ -84,14 +112,10 @@ if __name__ == "__main__":
     for char in s:
         nodes.append(char)
     # print(matches(nodes))
-    count = 0
-    for subset in itertools.combinations(matches(nodes), len(nodes)//2):
-        if is_complete_match(subset):
-            print(subset, " is complete.")
-            if is_noncrossing(subset):
-                count += 1
-                print(subset, " is complete and non-crossing.")
-    print (count, " total")
+    # print(count_complete_edges(matches(nodes)))
+    # print(complete_matches(matches(nodes), []))
+    print(slow_complete_matches(s))
+    print(len(slow_complete_matches(s)))
 
 
 
