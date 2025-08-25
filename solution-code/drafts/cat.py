@@ -63,18 +63,19 @@ def remove_dupes(s, x, y):
             response.append(edge)
     return response
 
-def fast_complete_matches(s, t):
-    # s is the set of matches
-    # n is the count of matches required to be full
-    for match in s:
+def fast_complete_matches(s):
+    nodes = []
+    for char in s:
+        nodes.append(char)
+    match_set = matches(nodes)
+    complete_matches = []
+    for match in match_set:
         # print(match)
-        t.append(match)
-        s1 = fast_complete_matches(remove_dupes(s, match[0], match[1]), t)
-        if len(t) == 6:
-            print(t)
+        subset = [[match] + remove_dupes(match_set, match[0], match[1])]
+
+    return complete_matches
 
 def slow_complete_matches(s):
-    count = 0
     nodes = []
     for char in s:
         nodes.append(char)
@@ -116,6 +117,7 @@ if __name__ == "__main__":
     # print(complete_matches(matches(nodes), []))
     print(slow_complete_matches(s))
     print(len(slow_complete_matches(s)))
+    print(fast_complete_matches(s))
 
 
 
