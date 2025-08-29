@@ -2,6 +2,8 @@ class TrieNode:
     def __init__(self, text = ''):
         self.text = text
         self.children = dict()
+        self.is_word = False
+        self.id = int
 
 class PrefixTree:
     def __init__(self):
@@ -14,6 +16,7 @@ class PrefixTree:
                 prefix = word[0:i+1]
                 current.children[char] = TrieNode(prefix)
             current = current.children[char]
+        current.is_word = True
 
     def __child_words_for(self, node, words):
         '''
@@ -42,6 +45,33 @@ class PrefixTree:
         # Step 2
         self.__child_words_for(current, words)
         return words
+
+    def crawl(self, prefix):
+        '''
+        Returns a list of all nodes beginning with the root, returning the node ID, child ID and text.
+        '''
+        nodes = list()
+        current = self.root
+        for char in prefix:
+            if char not in current.children:
+                # Could also just return words since it's empty by default
+                return list()
+            current = current.children[char]
+
+    def find(self, word):
+        '''
+        Returns the TrieNode representing the given word if it exists
+        and None otherwise.
+        '''
+        current = self.root
+        for char in word:
+            if char not in current.children:
+                return None
+            current = current.children[char]
+
+        # New code, None returned implicitly if this is False
+        if current.is_word:
+            return current
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_trie_sample.txt"
