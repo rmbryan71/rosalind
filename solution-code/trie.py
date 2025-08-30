@@ -16,7 +16,7 @@ def as_adjacency(graph, nodes=[]):
     return nodes
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_trie_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_trie.txt"
     file = open(file_path, "r").readlines()
     strings = []
     for line in file:
