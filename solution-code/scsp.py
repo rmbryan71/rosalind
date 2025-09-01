@@ -1,5 +1,3 @@
-
-
 def LCSLength(s, t):
     C = [[0 for i in range(len(t)+1)] for j in range(len(s)+1)]
     for i in range(len(s)):
@@ -9,7 +7,6 @@ def LCSLength(s, t):
             else:
                 C[i][j]=max(C[i][j-1], C[i-1][j])
     return C
-
 
 def backtrack(C, s, t, i, j):
     if i == -1:
@@ -42,11 +39,11 @@ def scsp(s, t, lcs):
     return "".join(scs)
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_scsp_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_scsp.txt"
     strings = []
     x = open(file_path).readlines()
     s = x[0].strip()
     t = x[1].strip()
-    print(s, t)
+    # print(s, t)
     lcs = (backtrack((LCSLength(s, t)), s, t, len(s)-1, len(t)-1))
     print(scsp(s, t, lcs))
