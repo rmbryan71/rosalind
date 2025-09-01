@@ -10,22 +10,19 @@ if __name__ == "__main__":
     file = open(file_path, "r").readlines()
     S = []
     for line in file:
-        S.append(line.strip())
+        if line.strip() not in S:
+            S.append(line.strip())
     reverse_complements = []
     for sequence in S:
         reverse_complements.append(reverse_complement(sequence))
     for rc in reverse_complements:
         if rc not in S:
             S.append(rc)
-    k = len(S[0])-1
-    kmers = []
-    for string in S:
-        kmers.append(string[1:])
-        kmers.append(string[:-1])
-    # print(kmers)
-    count = 0
+    result = []
     for edge in S:
+        result.append(str((edge[:-1], edge[1:])).replace("'", ""))
+    count = 0
+    for item in result:
         count += 1
-        e = str((edge[:-1], edge[1:]))
-        print(e.replace("'", ""))
+        print(item)
 
