@@ -1,4 +1,5 @@
 from Bio import SeqIO
+from functools import cache
 
 def read_fasta(file):
     return list(SeqIO.parse(file, 'fasta'))
@@ -15,6 +16,8 @@ def isComplement(a, b):
     else:
         return False
 
+
+@cache
 def motzkin(dna):
     if len(dna) == 1:
         return 1
@@ -31,9 +34,10 @@ def motzkin(dna):
             % 1000000
         )
 
-
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_motz_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_motz.txt"
     s = str(read_fasta(file_path)[0].seq).strip()
+    print(s)
+    print(len(s))
     print(motzkin(s))
 
