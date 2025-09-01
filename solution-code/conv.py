@@ -16,7 +16,7 @@ def max_diff(mylist):
     return max(newlist, key=newlist.count)
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_conv_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_conv.txt"
     S1 = []
     S2 = []
     x = open(file_path).readlines()
