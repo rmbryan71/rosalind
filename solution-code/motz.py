@@ -16,7 +16,6 @@ def isComplement(a, b):
     else:
         return False
 
-
 @cache
 def motzkin(dna):
     if len(dna) == 1:
@@ -39,5 +38,5 @@ if __name__ == "__main__":
     s = str(read_fasta(file_path)[0].seq).strip()
     print(s)
     print(len(s))
-    print(motzkin(s))
+    print(motzkin(s) % 1000000)
 
