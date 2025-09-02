@@ -46,5 +46,5 @@ if __name__ == "__main__":
     with open(file_path) as file:
         d = [line.strip() for line in file.readlines()]
     res = [[int(x) for x in line.split(" ")] for line in d if line]
-    dist = [getReversalDistance(res[i], res[i+1]) for i in range(0, len(res), 2)]
+    dist = getReversalDistance(res[0], res[1])
     print(str(dist).strip("[]").replace(",", ""))
