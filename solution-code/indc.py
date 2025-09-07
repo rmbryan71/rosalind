@@ -3,7 +3,7 @@ from math import factorial
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_indc.txt"
-    n = int(open(file_path, "r").readline()[0])
+    n = int(open(file_path, "r").readlines()[0])
     p = .5
     Pr = 0
     A = []
