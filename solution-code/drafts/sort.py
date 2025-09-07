@@ -1,63 +1,54 @@
-def performReversal(sequence, start_index, end_index):
-    prefix = sequence[:start_index]
-    reversed_subsequence = sequence[start_index:end_index][::-1]
-    suffix = sequence[end_index:]
-    return prefix + reversed_subsequence + suffix
+from itertools import combinations
 
-def findBreakpoints(sequence, target_sequence):
-    breakpoints = []
-    for index in range(len(sequence)-1):
-        current_element = sequence[index]
-        adjacent_element = sequence[index+1]
-        if abs(target_sequence.index(current_element) - target_sequence.index(adjacent_element)) != 1:
-            breakpoints.append(index+1)
-    return breakpoints
+def flip(x, i, j):
+    """Flip a section of a sequence"""
+    rev = list.copy(x)
+    rev[i:j] = rev[i:j][::-1]
+    return rev
 
-def findMinimumBreakpointReversals(sequences, target_sequence):
-    reversals = []
-    for sequence in sequences:
-        breakpoints = findBreakpoints(sequence[0], target_sequence)
-        for start_index_i in range(len(breakpoints)-1):
-            for end_index_i in range(start_index_i+1, len(breakpoints)):
-                reversals.append((performReversal(sequence[0], breakpoints[start_index_i], breakpoints[end_index_i]), sequence[1] + [(breakpoints[start_index_i]-1, breakpoints[end_index_i]-1)]))
-    min_bp = len(target_sequence)
-    minimum_reversals = []
-    for reversal in reversals:
-        num_breakpoints = len(findBreakpoints(reversal[0], target_sequence))
-        if num_breakpoints < min_bp:
-            min_bp = num_breakpoints
-            minimum_reversals = [reversal]
-        elif num_breakpoints == min_bp:
-            minimum_reversals.append(reversal)
-    return minimum_reversals
+def breaks(s, t):
+    """Identify breaks between a sequence and target"""
+    return [
+        i + 1 for i in range(len(s) - 1) if abs(t.index(s[i]) - t.index(s[i + 1])) != 1
+    ]
 
-def getReversalDistanceWithHistories(sequence, target_sequence):
-    sequence = ["-"] + sequence + ["+"]
-    target_sequence = ["-"] + target_sequence + ["+"]
-    reversals = 0
-    current_sequences = [(sequence, [])]
-    while target_sequence not in [current_sequence[0] for current_sequence in current_sequences]:
-        current_sequences = findMinimumBreakpointReversals(current_sequences, target_sequence)
-        reversals += 1
-    return reversals, current_sequences
+def min_breaks(seqs, t):
+    rev = []
+    for s in seqs:
+        for i, j in combinations(breaks(s["s"], t), 2):
+            rev.append({"s": flip(s["s"], i, j), "p": s["p"] + [[i, j - 1]]})
+    min_b = len(t)
+    mr = []
+    for r in rev:
+        n = len(breaks(r["s"], t))
+        if n < min_b:
+            min_b = n
+            mr = [r]
+        elif n == min_b:
+            mr.append(r)
+    return mr
 
-def buildSequencesFromHistory(sequence, reversal_history):
-    sequence_history = [sequence]
-    for reversal_start, reversal_end in reversal_history:
-        sequence_history.append(performReversal(sequence_history[-1], reversal_start, reversal_end))
-    return sequence_history
+def sort(s, t):
+    """Sorting by Reversals"""
+    s = ["-"] + s + ["+"]
+    t = ["-"] + t + ["+"]
+    nr = 0
+    c = [{"s": s, "p": []}]
+    seqs = [s]
+    while t not in seqs:
+        c = min_breaks(c, t)
+        nr += 1
+        seqs = [x["s"] for x in c]
+    return nr, c
 
 if __name__ == "__main__":
-
-    sequence = [3, 10, 8, 2, 5, 4, 7, 1, 6, 9]
-    target_sequence = [5, 2, 3, 1, 7, 4, 10, 8, 6, 9]
-
-    rev_distance, histories = getReversalDistanceWithHistories(sequence, target_sequence)
-    for history in histories:
-        sequences_from_history = buildSequencesFromHistory(sequence, history[1])
-        print("Sequence:", sequence)
-        print("Target:", target_sequence)
-        print("Distance:", rev_distance)
-        for s in sequences_from_history:
-            print(s)
-        print("\n")
+    file_path = "/Users/robertbryan/Downloads/rosalind_sort_sample.txt"
+    with open(file_path) as file:
+        d = [line.strip() for line in file.readlines()]
+    s, t = d[0], d[1]
+    s = list(map(int, s.split()))
+    t = list(map(int, t.split()))
+    nr, c = sort(s, t)
+    print(nr)
+    for r in c[0]["p"]:
+        print(*r)
