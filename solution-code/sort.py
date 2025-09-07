@@ -42,12 +42,13 @@ def sort(s, t):
     return nr, c
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_sort_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_sort.txt"
     with open(file_path) as file:
         d = [line.strip() for line in file.readlines()]
     s, t = d[0], d[1]
     s = list(map(int, s.split()))
     t = list(map(int, t.split()))
+    print(s, t)
     nr, c = sort(s, t)
     print(nr)
     for r in c[0]["p"]:
