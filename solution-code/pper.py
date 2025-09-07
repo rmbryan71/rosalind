@@ -11,4 +11,4 @@ if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_pper.txt"
     file = open(file_path, "r").read().split(' ')
     n, k = int(file[0]), int(file[1])
-    print(comb(n, k))
+    print(comb(n, k) % 1000000)

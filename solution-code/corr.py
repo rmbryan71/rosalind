@@ -67,9 +67,11 @@ if __name__ == "__main__":
     sequences = []
     for record in read_fasta(file_path):
         sequences.append(record.seq)
-    # print(sequences)
+    print(len(sequences))
+    print(len(sequences[0]))
     # print(find_bad_reads(sequences))
     # print(find_good_reads(sequences))
     answer = corrections(find_bad_reads(sequences), find_good_reads(sequences))
+    print(len(answer))
     for x, y in answer.items():
         print(x+'->'+y)

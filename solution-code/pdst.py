@@ -25,3 +25,4 @@ if __name__ == "__main__":
             file.write(p_dist(s1, s2))
             file.write(' ')
         file.write('\n')
+    file.close()
