@@ -32,15 +32,25 @@ if __name__ == "__main__":
     L = []
     for line in file:
         L.append(float(line.strip()))
+
     parent_mass = L.pop(0)
+    w1 = L.pop(0)
+    w2 = L.pop(-1)
     L = sorted(L)
-    s1 = L.pop(0)
-    s2 = L.pop(-1)
-    print(parent_mass, s1, s2)
+    print(parent_mass, w1, w2)
     print(L)
     result = []
     while L:
-        result.append(round((L.pop(-1) - L.pop(0)), 2))
+        prefix = L.pop(0)
+        suffix = L.pop(-1)
+        val1 = round(prefix - w1, 2)
+        val2 = round(w2 - suffix, 2)
+        if val1 in rounded_dict.values():
+            result.append(val1)
+        if val2 in rounded_dict.values():
+            result.append(val2)
+
     for j in result:
+        # print(j)
         print(list(rounded_dict.keys())[list(rounded_dict.values()).index(j)], end='')
 
