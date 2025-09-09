@@ -34,21 +34,16 @@ if __name__ == "__main__":
         L.append(float(line.strip()))
 
     parent_mass = L.pop(0)
-    w1 = L.pop(0)
-    w2 = L.pop(-1)
     L = sorted(L)
-    print(parent_mass, w1, w2)
-    print(L)
+    # print(parent_mass)
+    # print(L)
     result = []
-    while L:
-        prefix = L.pop(0)
-        suffix = L.pop(-1)
-        val1 = round(prefix - w1, 2)
-        val2 = round(w2 - suffix, 2)
-        if val1 in rounded_dict.values():
-            result.append(val1)
-        if val2 in rounded_dict.values():
-            result.append(val2)
+    for i in range(0, len(L)//2):
+        w1 = L[i]
+        w2 = L[len(L)-1-i]
+        sum = w1 + w2
+        print(i, w1, w2, sum)
+
 
     for j in result:
         # print(j)
