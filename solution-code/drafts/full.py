@@ -22,7 +22,7 @@ mydict= {
 }
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_full_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_full.txt"
     file = open(file_path, "r").readlines()
 
     rounded_dict = dict()
@@ -36,19 +36,20 @@ if __name__ == "__main__":
     parent_mass = L.pop(0)
     L = sorted(L)
     print(L)
-    for i in range(0, len(L)):
-        for j in range(0, len(L)):
-            result = []
-            w1 = L[i]
-            w2 = L[j]
-            for k in range(0, len(L)):
-                val = L[k]
-                if round(val - w1, 2) in rounded_dict.values():
-                    result.append(round(val - w1, 2))
-                if round(val - w2, 2) in rounded_dict.values():
-                    result.append(round(val - w2, 2))
-                if len(result) == 5:
-                    print(result)
+    result = []
+    w2 = L.pop(len(L)//2)
+    w1 = L.pop(0)
+    print(w1, w2, L)
+    prefix, suffix = 0, 0
+    for i in range(0, len(L)//2):
+        prefix_candidate = L[i] - prefix - w1
+        suffix_candidate = L[len(L)//2 + i] - suffix - w2
+        if round(prefix_candidate, 2) in rounded_dict.values():
+            result.append(round(prefix_candidate, 2))
+            prefix += prefix_candidate
+        if round(suffix_candidate, 2) in rounded_dict.values():
+            result.append(round(suffix_candidate, 2))
+            suffix += suffix_candidate
 
     for j in result:
         # print(j)
