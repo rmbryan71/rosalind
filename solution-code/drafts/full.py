@@ -35,15 +35,20 @@ if __name__ == "__main__":
 
     parent_mass = L.pop(0)
     L = sorted(L)
-    # print(parent_mass)
-    # print(L)
-    result = []
-    for i in range(0, len(L)//2):
-        w1 = L[i]
-        w2 = L[len(L)-1-i]
-        sum = w1 + w2
-        print(i, w1, w2, sum)
-
+    print(L)
+    for i in range(0, len(L)):
+        for j in range(0, len(L)):
+            result = []
+            w1 = L[i]
+            w2 = L[j]
+            for k in range(0, len(L)):
+                val = L[k]
+                if round(val - w1, 2) in rounded_dict.values():
+                    result.append(round(val - w1, 2))
+                if round(val - w2, 2) in rounded_dict.values():
+                    result.append(round(val - w2, 2))
+                if len(result) == 5:
+                    print(result)
 
     for j in result:
         # print(j)
