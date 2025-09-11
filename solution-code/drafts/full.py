@@ -39,16 +39,19 @@ if __name__ == "__main__":
     result = []
     w2 = L.pop(len(L)//2)
     w1 = L.pop(0)
+    for a in range(len(L)//2):
+        result.append(0)
+    print(result)
     print(w1, w2, L)
     prefix, suffix = 0, 0
     for i in range(0, len(L)//2):
         prefix_candidate = L[i] - prefix - w1
         suffix_candidate = L[len(L)//2 + i] - suffix - w2
         if round(prefix_candidate, 2) in rounded_dict.values():
-            result.append(round(prefix_candidate, 2))
+            result[i]=(round(prefix_candidate, 2))
             prefix += prefix_candidate
         if round(suffix_candidate, 2) in rounded_dict.values():
-            result.append(round(suffix_candidate, 2))
+            result[i] = (round(suffix_candidate, 2))
             suffix += suffix_candidate
 
     for j in result:
