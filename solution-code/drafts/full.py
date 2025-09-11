@@ -22,7 +22,7 @@ mydict= {
 }
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_full_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_full.txt"
     file = open(file_path, "r").readlines()
 
     rounded_dict = dict()
