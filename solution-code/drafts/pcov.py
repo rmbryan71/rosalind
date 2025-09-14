@@ -56,16 +56,10 @@ def pcov(reads):
     return response
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_pcov_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_pcov.txt"
     reads = []
     with open(file_path) as file:
         for line in file:
             reads.append(str(line.strip()))
-    min_len = sys.maxsize
-    for perm in permutations(reads):
-        my_len = len(pcov(perm))
-        if my_len < min_len:
-            min_len = my_len
-            print(pcov(perm), my_len)
-    print("Done.")
+    print(pcov(reads))
 
