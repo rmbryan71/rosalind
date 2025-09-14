@@ -56,7 +56,7 @@ def pcov(reads):
     return response
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_pcov.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_pcov_sample.txt"
     reads = []
     with open(file_path) as file:
         for line in file:
