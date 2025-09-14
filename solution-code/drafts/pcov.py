@@ -1,65 +1,51 @@
-import sys
-from itertools import permutations
+from Bio import SeqIO
+import sys, os
 
-def rotations(s):
-    result = []
-    for i in range(len(s)):
-        result.append(s[i:] + s[:i])
-    return result
+def read_fasta(file):
+    return list(SeqIO.parse(file, 'fasta'))
 
-def add_cyclic(s, t):
-    if len(s) < len(t):
-        return False
-    s1 = s + s
-    if t in s1:
-        return s
-    s1 = rotations(s)
-    t1 = rotations(t)
-    max_overlap = 0
-    result = ''
-    for s_ in s1:
-        for t_ in t1:
-            if max_overlap_count(s_, t_) > max_overlap:
-                result = concat_strings(s_, t_)
-                max_overlap = max_overlap_count(s_, t_)
-            if max_overlap_count(t_, s_) > max_overlap:
-                result = concat_strings(t_, s_)
-                max_overlap = max_overlap_count(t_, s_)
-    return result
-
-def max_overlap_count(str1, str2):
-    a = len(str1) + len(str2)
-    b = len(overlap(str1, str2))
-    return int(a-b)
-
-
-def concat_strings(str1, str2):
-    if len(str1) == 0 or len(str2) == 0:
-        return str1 + str2
-    for i in range(min(len(str1), len(str2)), 0, -1):
-        if str1.endswith(str2[:i]):
-            return str1 + str2[i:]
-    return str1 + str2
+def min(a, b):
+    return a if a < b else b
 
 def overlap(str1, str2):
-    r1 = len(concat_strings(str1, str2))
-    r2 = len(concat_strings(str2, str1))
-    if r1 >= r2:
-        return concat_strings(str2, str1)
-    else:
-        return concat_strings(str1, str2)
+    max_len = -sys.maxsize
+    len1 = len(str1)
+    len2 = len(str2)
+    str_ = ""
+    for i in range(1, min(len1, len2) + 1):
+        if str1[len1-i:] == str2[:i]:
+            if max_len < i:
+                max_len = i
+                str_ = str1 + str2[i:]
+    for i in range(1, min(len1, len2) + 1):
+        if str1[:i] == str2[len2-i:]:
+            if max_len < i:
+                max_len = i
+                str_ = str2 + str1[i:]
+    return max_len, str_
 
-def pcov(reads):
-    response = reads[0]
-    for j in range(1, len(reads)):
-        response = add_cyclic(response, reads[j])
-    return response
+def long(arr, n):
+    while n != 1:
+        max_len = -sys.maxsize
+        l, r = 0, 0
+        res_str = ""
+        for i in range(n):
+            for j in range(i+1, n):
+                str_ = ("")
+                res, str_ = overlap(arr[i], arr[j])
+                if max_len < res:
+                    max_len = res
+                    res_str = str_
+                    l, r = i, j
+        n -= 1
+        if max_len == -sys.maxsize:
+            arr[0] += arr[n]
+        else:
+            arr[l] = res_str
+            arr[r] = arr[n]
+    return arr[0]
 
 if __name__ == "__main__":
     file_path = "/Users/robertbryan/Downloads/rosalind_pcov.txt"
     reads = []
-    with open(file_path) as file:
-        for line in file:
-            reads.append(str(line.strip()))
-    print(pcov(reads))
 
