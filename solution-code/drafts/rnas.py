@@ -1,8 +1,4 @@
-from Bio import SeqIO
 from functools import cache
-
-def read_fasta(file):
-    return list(SeqIO.parse(file, 'fasta'))
 
 def isComplement(a, b):
     if a == 'A' and b == 'U':
@@ -13,29 +9,32 @@ def isComplement(a, b):
         return True
     if a == 'G' and b == 'C':
         return True
+    if a == 'U' and b == 'G':
+        return True
+    if a == 'G' and b == 'U':
+        return True
     else:
         return False
 
 @cache
-def rnas(dna):
-    if len(dna) == 1:
+def rnas(rna):
+    if len(rna) == 1:
         return 1
-    if len(dna) == 0:
+    if len(rna) == 0:
         return 1
     else:
         return (
-            rnas(dna[1:])
+            rnas(rna[1:])
             + sum(
-                rnas(dna[1:m]) * rnas(dna[m + 1 :])
-                for m in range(1, len(dna))
-                if isComplement(dna[0], dna[m])
+                rnas(rna[1:m]) * rnas(rna[m + 1 :])
+                for m in range(4, len(rna))
+                if isComplement(rna[0], rna[m])
             )
-            % 1000000
         )
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_rnas_sample.txt"
-    s = str(read_fasta(file_path)[0].seq).strip()
+    file_path = "/Users/robertbryan/Downloads/rosalind_rnas.txt"
+    with open(file_path) as file:
+        s = str(file.readline())
     print(s)
-    print(len(s))
-    print(rnas(s) % 1000000)
+    print(rnas(s))
