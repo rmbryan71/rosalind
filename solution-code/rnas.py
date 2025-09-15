@@ -37,4 +37,5 @@ if __name__ == "__main__":
     with open(file_path) as file:
         s = str(file.readline())
     print(s)
+    print(len(s))
     print(rnas(s))
