@@ -15,7 +15,7 @@ def ctbl(node, taxa):
 
 
 if __name__ == "__main__":
-    file_path = "/Users/robertbryan/Downloads/rosalind_ctbl_sample.txt"
+    file_path = "/Users/robertbryan/Downloads/rosalind_ctbl.txt"
     tree = Phylo.read(file_path, 'newick')
     nodes = []
     for node in tree.find_clades():
